@@ -19,6 +19,7 @@ const createNewUser = (req, res) => {
   const userData = {
     username: req.body.username,
     password: req.body.password,
+    role: req.body.role,
     isActive: 1
   };
 
@@ -40,6 +41,7 @@ const updateUser = (req, res) => {
   var userData = {
     username: req.body.username,
     password: req.body.password,
+    role: req.body.role,
     isActive: req.body.isActive
   };
 
@@ -62,10 +64,10 @@ const updateUser = (req, res) => {
 
 const getUser = (req, res) => {
   var userId = req.params.id;
-
+  console.log("UserId: ", userId);
   User.findOne({ where: { id: userId } })
     .then(user => {
-      res.send(user);
+      res.send({ status: 200, User: user });
     })
     .catch(err => {
       res.json({ message: "Internal Server Error", status: 500 });

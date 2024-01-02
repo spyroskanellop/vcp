@@ -20,11 +20,19 @@ const User = sequelize.define("User", {
         },
         unique: {
             args: true,
-            msg: "Another user with this email already exists, maybe its your evil twin?"
+            msg: "Another user with this username already exists, maybe its your evil twin?"
         }
     },
     password: {
         type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true
+        }
+    },
+    role: {
+        type: DataTypes.ENUM,
+        values: ['admin', 'rescuer', 'civilian'],
         allowNull: false,
         validate: {
             notEmpty: true
